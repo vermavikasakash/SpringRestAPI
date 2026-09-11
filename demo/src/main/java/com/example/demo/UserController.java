@@ -1,20 +1,25 @@
 package com.example.demo;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
-    UserController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping("/users")
     public User createUser(@RequestParam String name) {
         return userService.createUser(name);
+    }
+
+    @GetMapping("/users")
+    public List<User> getUsers() {
+        return userService.getUsers();
     }
 }
